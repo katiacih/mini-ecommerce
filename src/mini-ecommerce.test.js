@@ -1,12 +1,13 @@
-import { render, screen } from '@testing-library/react';
-import MiniECommerce from './mini-ecommerce';
+import React from 'react';
+import { render } from '@testing-library/react';
+import MiniEcommerce from './mini-ecommerce';
 
-describe('Mini Ecommerce', () => {
-  it('deve renderizar ecommere corretamente', () => {
-    render(<MiniECommerce />);
-    const div = screen.getByTestId('App')
-    expect(div).toBeInTheDocument();
+describe('Teste do componente mini-ecommerce', () => {
+
+  it('deve renderizar o componente sem erros', () => {
+    const { getByText } = render(<MiniEcommerce />);
+    const linkElement = getByText('Mini Ecommerce');
+    expect(linkElement).toBeInTheDocument();
   });
 
-})
-
+});

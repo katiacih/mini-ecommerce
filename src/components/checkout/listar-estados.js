@@ -1,6 +1,6 @@
 import React from 'react';
- 
-export function ListarEstados () {
+
+function ListarEstados() {
 
   const estados = [
     { 'sigla': '',   'nome': 'Selecione o estado' },
@@ -40,4 +40,7 @@ export function ListarEstados () {
       {estado.nome}
     </option>
   );
+
 }
+
+export default ListarEstados;

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
- 
-export function ListarCidades (props) {
-  const CIDADES_URL = 'http://localhost:3001/mini-ecomerce/estado/:estado/cidades';
+
+function ListarCidades(props) {
+
+  const CIDADES_URL = 'http://localhost:3001/mini-ecommerce/estado/:estado/cidades';
   const [cidades, setCidades] = useState([]);
 
   useEffect(() => {
@@ -34,3 +35,5 @@ export function ListarCidades (props) {
 ListarCidades.propTypes = {
   estado: PropTypes.string.isRequired
 }
+
+export default ListarCidades;

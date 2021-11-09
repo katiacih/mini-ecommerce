@@ -1,5 +1,3 @@
-
-
 export function formatarCpf(cpf) {
   cpf = cpf.replace(/\D/g, '');
   if (cpf.length > 11) {

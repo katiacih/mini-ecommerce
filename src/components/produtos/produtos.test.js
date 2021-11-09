@@ -1,13 +1,15 @@
-import { render, screen } from '@testing-library/react';
-import { Produtos } from './produtos';
+import React from 'react';
+import { render } from '@testing-library/react';
+import Produtos from './produtos';
 
-describe('componente Produtos', () => {
+describe('Teste do componente produtos', () => {
 
-  it('Deve renderizar produtos corretamente', () => {
-   render(<Produtos 
-      visivel={true} 
-      adicionarProduto={jest.fn()} />);
-   const div = screen.getByTestId('produtos')
-   expect(div).toBeInTheDocument();
+  it('deve renderizar o componente quando visível', () => {
+    const { getAllByText } = render(
+      <Produtos visivel={true} adicionarProduto={() => false} />
+    );
+    const botoes = getAllByText(/comprar/i);
+    expect(botoes).toBeTruthy();
   });
-})
+
+});

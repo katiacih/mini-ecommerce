@@ -1,53 +1,18 @@
-import { render, screen, waitFor } from '@testing-library/react';
-import { Menu } from './menu';
-import faker from 'faker'
+import React from 'react';
+import { render } from '@testing-library/react';
+import Menu from './menu';
 
-function getProduto () {
-  return { nome: faker.commerce.productName(),
-     preco: `R$ ${faker.random.float({max: 30})}` }
-}
+describe('Teste do componente de menu', () => {
 
-function generateProdutos () {
-  const numProdutos = faker.random.number({min: 1, max: 10})
-  const prod = [];
-  for (let index = 0; index < numProdutos; index++) {
-    prod[index] = getProduto()
-  }
-  return prod;
+  it('deve renderizar o componente sem erros', () => {
+    const { getByText } = render(
+      <Menu
+        produtos={[]}
+        handleExibirProdutos={() => false}
+        handleExibirCheckout={() => false} />
+    );
+    const texto = getByText(/mini ecommerce/i);
+    expect(texto).toBeInTheDocument();
+  });
 
-}
-
-describe('componente Menu', () => {
-  describe('Com carrinho cheio', () => {
-    beforeEach(() => {
-      render(<Menu produtos={generateProdutos()} 
-      handleExibirCheckout={jest.fn()} 
-      handleExibirProdutos={jest.fn()}/>);
-    })
-    it('verifica se componentes foram renderizados com sucesso', async () => {
-     expect(screen.getByText(/mini ecommerce/i)).toBeInTheDocument();
-     expect(screen.getByText(/carrinho/i)).toBeInTheDocument();
-     screen.getByText(/carrinho/i).click();
-     await waitFor(() => expect(screen.getByTestId('total-carrinho')).toBeInTheDocument())
-     expect(screen.getByText(/finalizar compra/i)).toBeInTheDocument();
-    });
-  })
-
-  describe('Com carrinho vazio', () => {
-    beforeEach(() => {
-      // render(<Menu produtos={[]} 
-      //   handleExibirCheckout={jest.fn()} 
-      //   handleExibirProdutos={jest.fn()}/>);
-    })
-    it('verifica se componentes foram renderizados com sucesso', () => {
-      render(<Menu produtos={[]} 
-        handleExibirCheckout={jest.fn()} 
-        handleExibirProdutos={jest.fn()}/>);
-      screen.getByText(/carrinho/i).click()
-      expect(screen.getByText('Total: R$ 0,00')).toBeInTheDocument();
-      expect(screen.getByText(/finalizar compra/i)).toBeInTheDocument();
-    });
-  })
- 
-
-})
+});

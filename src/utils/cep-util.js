@@ -1,4 +1,4 @@
-export function formatarCep(cep) {
+export default function formatarCep(cep) {
   cep = cep.replace(/\D/g, '');
   if (cep.length > 8) {
     cep = cep.substring(0, 8);
